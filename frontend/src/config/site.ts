@@ -9,7 +9,7 @@ export type SocialLink = {
 export const siteConfig = {
   name: "Jan Kalyan Charitable Trust",
   logo: {
-    src: "/Jan Kalyan Charitable Trust Logo.png",
+    src: "/Jan Kalyan Charity Trust Logo.png",
     alt: "Jan Kalyan Charitable Trust logo",
     width: 1536,
     height: 1024,
