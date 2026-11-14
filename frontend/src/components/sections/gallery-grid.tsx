@@ -20,9 +20,10 @@ const bentoPattern = [
   "lg:col-span-2",
 ];
 
-export function GalleryGrid() {
+export function GalleryGrid({ tone = "dark" }: { tone?: "light" | "dark" }) {
   const { allLabel, filterLabel, categories, items } = galleryContent;
   const [active, setActive] = useState<string>(ALL);
+  const dark = tone === "dark";
 
   const showAll = active === ALL;
   const visible = showAll ? items : items.filter((item) => item.category === active);
@@ -45,10 +46,13 @@ export function GalleryGrid() {
               aria-pressed={selected}
               onClick={() => setActive(filter.slug)}
               className={cn(
-                "relative shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold outline-none transition-colors duration-300 focus-visible:ring-3 focus-visible:ring-white/50 sm:px-5",
+                "relative shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold outline-none transition-colors duration-300 focus-visible:ring-3 sm:px-5",
+                dark ? "focus-visible:ring-white/50" : "focus-visible:ring-ring/50",
                 selected
                   ? "text-white"
-                  : "bg-white/5 text-white/75 ring-1 ring-white/10 hover:bg-white/10 hover:text-white",
+                  : dark
+                    ? "bg-white/5 text-white/75 ring-1 ring-white/10 hover:bg-white/10 hover:text-white"
+                    : "bg-white text-primary ring-1 ring-border hover:ring-primary/30",
               )}
             >
               {selected && (
@@ -83,7 +87,8 @@ export function GalleryGrid() {
               exit={{ opacity: 0, scale: 0.92 }}
               transition={{ duration: 0.5, ease: easeOut }}
               className={cn(
-                "group relative overflow-hidden rounded-[22px] bg-white/5 ring-1 ring-white/10",
+                "group relative overflow-hidden rounded-[22px] ring-1",
+                dark ? "bg-white/5 ring-white/10" : "bg-light-blue ring-primary/5",
                 showAll ? cn("aspect-square lg:aspect-auto", bentoPattern[index % bentoPattern.length]) : "aspect-4/3",
               )}
             >

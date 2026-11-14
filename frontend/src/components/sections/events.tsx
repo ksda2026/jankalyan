@@ -1,14 +1,11 @@
-import * as motion from "motion/react-client";
-
-import { EventRow } from "@/components/cards/event-row";
 import { Container } from "@/components/layout/container";
+import { EventsList } from "@/components/sections/events-list";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import { eventsContent } from "@/config/home";
-import { inViewFadeUp } from "@/lib/motion";
 
 export function EventsSection() {
-  const { id, heading, highlight, ctaLabel, items } = eventsContent;
+  const { id, heading, highlight } = eventsContent;
 
   return (
     <section id={id} className="relative isolate overflow-hidden bg-light-orange py-16 md:py-20 lg:py-24">
@@ -20,18 +17,7 @@ export function EventsSection() {
 
       <Container>
         <SectionHeading heading={heading} highlight={highlight} />
-
-        <div className="mt-10 flex flex-wrap justify-center gap-4 lg:mt-12">
-          {items.map((event, index) => (
-            <motion.div
-              key={event.href}
-              className="w-full sm:w-[calc((100%-1rem)/2)] lg:w-full"
-              {...inViewFadeUp(index * 0.08)}
-            >
-              <EventRow {...event} number={String(index + 1).padStart(2, "0")} ctaLabel={ctaLabel} />
-            </motion.div>
-          ))}
-        </div>
+        <EventsList className="mt-10 lg:mt-12" />
       </Container>
     </section>
   );

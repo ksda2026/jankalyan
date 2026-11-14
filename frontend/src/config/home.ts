@@ -1,5 +1,10 @@
 import { routes } from "@/config/navigation";
 
+// Adds the detail-page link to each item from its slug.
+function withHref<T extends { slug: string }>(basePath: string, items: readonly T[]) {
+  return items.map((item) => ({ ...item, href: `${basePath}/${item.slug}` }));
+}
+
 export const heroContent = {
   id: "hero",
   heading: ["Empowering Lives.", "Building a Better Tomorrow."],
@@ -25,14 +30,14 @@ export const projectsContent = {
   description:
     "We are committed to building a better society through education, healthcare, women empowerment, environmental protection, and social welfare initiatives.",
   ctaLabel: "Learn More",
-  items: [
+  items: withHref(routes.ourProjects, [
     {
       number: "01",
       title: "Education for Every Child",
       description:
         "Supporting underprivileged children with access to education and better learning opportunities.",
       category: "Education",
-      href: `${routes.ourProjects}/education-for-every-child`,
+      slug: "education-for-every-child",
       image: { src: "/assets/projects/education-for-every-child.png", alt: "Education for Every Child" },
     },
     {
@@ -41,7 +46,7 @@ export const projectsContent = {
       description:
         "Promoting health awareness and supporting access to essential healthcare services.",
       category: "Healthcare",
-      href: `${routes.ourProjects}/community-healthcare-initiative`,
+      slug: "community-healthcare-initiative",
       image: {
         src: "/assets/projects/community-healthcare-initiative.png",
         alt: "Community Healthcare Initiative",
@@ -53,7 +58,7 @@ export const projectsContent = {
       description:
         "Encouraging women's independence, confidence, and equal opportunities through community initiatives.",
       category: "Women Empowerment",
-      href: `${routes.ourProjects}/women-empowerment`,
+      slug: "women-empowerment",
       image: { src: "/assets/projects/women-empowerment.png", alt: "Women Empowerment" },
     },
     {
@@ -62,10 +67,10 @@ export const projectsContent = {
       description:
         "Promoting environmental awareness and encouraging communities to build a cleaner and greener future.",
       category: "Environment",
-      href: `${routes.ourProjects}/environmental-protection`,
+      slug: "environmental-protection",
       image: { src: "/assets/projects/environmental-protection.png", alt: "Environmental Protection" },
     },
-  ],
+  ]),
 } as const;
 
 export const activitiesContent = {
@@ -73,29 +78,29 @@ export const activitiesContent = {
   heading: "Our Activities",
   highlight: "Activities",
   ctaLabel: "View Activity",
-  items: [
+  items: withHref(routes.ourActivity, [
     {
       title: "Educational Awareness Drive",
       description:
         "Encouraging children and families to understand the importance of education and equal learning opportunities.",
-      href: `${routes.ourActivity}/educational-awareness-drive`,
+      slug: "educational-awareness-drive",
       image: { src: "/assets/activities/educational-awareness-drive.png", alt: "Educational Awareness Drive" },
     },
     {
       title: "Community Health Awareness",
       description:
         "Spreading awareness about health, hygiene, and the importance of preventive healthcare.",
-      href: `${routes.ourActivity}/community-health-awareness`,
+      slug: "community-health-awareness",
       image: { src: "/assets/activities/community-health-awareness.png", alt: "Community Health Awareness" },
     },
     {
       title: "Social Welfare Support",
       description:
         "Extending support to underprivileged families and individuals facing social and economic challenges.",
-      href: `${routes.ourActivity}/social-welfare-support`,
+      slug: "social-welfare-support",
       image: { src: "/assets/activities/social-welfare-support.png", alt: "Social Welfare Support" },
     },
-  ],
+  ]),
 } as const;
 
 export const ctaContent = {
@@ -114,19 +119,19 @@ export const eventsContent = {
   heading: "Events",
   highlight: "Events",
   ctaLabel: "View Details",
-  items: [
+  items: withHref(routes.events, [
     {
       title: "Community Awareness Programme",
       description:
         "An initiative focused on spreading awareness about education, healthcare, and social responsibility.",
-      href: `${routes.events}/community-awareness-programme`,
+      slug: "community-awareness-programme",
       image: { src: "/assets/events/community-awareness-programme.png", alt: "Community Awareness Programme" },
     },
     {
       title: "World Environment Day Celebration",
       description:
         "Bringing communities together to promote environmental protection and sustainable living.",
-      href: `${routes.events}/world-environment-day-celebration`,
+      slug: "world-environment-day-celebration",
       image: {
         src: "/assets/events/world-environment-day-celebration.png",
         alt: "World Environment Day Celebration",
@@ -136,10 +141,10 @@ export const eventsContent = {
       title: "Women Empowerment Programme",
       description:
         "Promoting women's rights, independence, confidence, and participation in community development.",
-      href: `${routes.events}/women-empowerment-programme`,
+      slug: "women-empowerment-programme",
       image: { src: "/assets/events/women-empowerment-programme.png", alt: "Women Empowerment Programme" },
     },
-  ],
+  ]),
 } as const;
 
 export const teamContent = {
